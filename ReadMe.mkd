@@ -1,0 +1,24 @@
+# Simulation Modeling Tool Kit (SMTK) Test Data
+
+This repository hosts test data for SMTK.
+It contains the following top-leve directories:
+
++ `baselines` - A directory containing known-good renderings of test data
+   used to verify that tests have passed.
++ `cgm` - Datasets used to test SMTK's bridge to
+  [CGMA](http://trac.mcs.anl.gov/projects/ITAPS/wiki/CGM).
++ `cmb` - Datasets used to test SMTK's bridge to CMB.
+
+The following datasets come from the CGMA repository's test data:
+
++ `cgm/62_shaver1.brep` - An [OpenCascade (OCC)](http://opencascade.org/)
+  model of a part from an electric razor.
++ `cgm/diffuser.iges` - An IGES model of a fluid diffuser.
++ `cgm/huge.sat` - An [ACIS](http://doc.spatial.com/index.php/Portal:ACIS)
+  model of a cube with many overlapping cylindrical tunnels cut into it.
+
+There are also files from CMB's test data, used to test
+SMTK's ability to import CMB models stored as VTK poly-data:
+
++ `cmb/test2D.cmb` - A 2-dimensional domain split into 5 faces.
++ `cmb/SimpleBox.cmb` - A simple 3-dimensional domain. It's a box. Surprise.

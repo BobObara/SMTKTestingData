@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<VTKFile type="PolyData" version="0.1" byte_order="LittleEndian" compressor="vtkZLibDataCompressor">
+  <PolyData>
+    <FieldData>
+      <DataArray type="Int32" Name="version" NumberOfTuples="1" format="binary" RangeMin="5" RangeMax="5">
+        AQAAAACAAAAEAAAADAAAAA==eJxjZWBgAAAAGAAG
+      </DataArray>
+      <DataArray type="Int64" Name="vertex point id" NumberOfTuples="7" format="binary" RangeMin="5" RangeMax="28">
+        AQAAAACAAAA4AAAAGwAAAA==eJxjZ4AAVijNA6X5oLQglJaB0qJQGgAKUABp
+      </DataArray>
+      <DataArray type="Float64" Name="vertex location" NumberOfComponents="3" NumberOfTuples="7" format="binary" RangeMin="3" RangeMax="8.94427191">
+        AQAAAACAAACoAAAALgAAAA==eJxjYAABDgcwxSACpWGAA40PA+jqMMQdsIuj61OA8gXQxGWg/A/2MBEAMW4EsA==
+      </DataArray>
+      <DataArray type="Int64" Name="ModelVertexIds" NumberOfTuples="7" format="binary" RangeMin="9" RangeMax="15">
+        AQAAAACAAAA4AAAAGwAAAA==eJzjZIAALijNDaV5oDQvlOaD0vxQGgAJ2ABV
+      </DataArray>
+      <DataArray type="Float64" Name="ModelVertexColor" NumberOfComponents="4" NumberOfTuples="7" format="binary" RangeMin="2" RangeMax="2">
+        AQAAAACAAADgAAAAFgAAAA==eJxjYACBD/sZsNP2OMSHjDwA2wIrpQ==
+      </DataArray>
+      <DataArray type="Int32" Name="ModelVertexVisibility" NumberOfTuples="7" format="binary" RangeMin="0" RangeMax="0">
+        AQAAAACAAAAcAAAACwAAAA==eJxjYMANAAAcAAE=
+      </DataArray>
+      <Array type="String" Name="ModelVertexUserName" NumberOfTuples="7" format="binary">
+        AQAAAACAAAA4AAAAEwAAAA==eJwrzctLzE1NYSglkQYAUDgUWQ==
+      </Array>
+      <DataArray type="Int64" Name="ModelEdgeEndPoints" NumberOfComponents="2" NumberOfTuples="10" format="binary" RangeMin="13.453624047" RangeMax="21.213203436">
+        AQAAAACAAACgAAAAJwAAAA==eJzjZIAALijNicaH0dxQmhdNHYzPA6X5cIhzo8njEudHowFJGADu
+      </DataArray>
+      <DataArray type="Int64" Name="ModelFloatingEdgeRegions" NumberOfTuples="10" format="binary" RangeMin="-1" RangeMax="-1">
+        AQAAAACAAABQAAAADAAAAA==eJz7/5+6AACcXE+x
+      </DataArray>
+      <DataArray type="Int32" Name="ModelEdgeLineResolution" NumberOfTuples="10" format="binary" RangeMin="1" RangeMax="1">
+        AQAAAACAAAAoAAAADwAAAA==eJxjZGBgYCQCAwABBAAL
+      </DataArray>
+      <DataArray type="Int64" Name="ModelEdgeIds" NumberOfTuples="10" format="binary" RangeMin="16" RangeMax="25">
+        AQAAAACAAABQAAAAIwAAAA==eJwTYIAAQSgtBKWFobQIlBaF0mJQWhxKS0BpSSgNACD4AM4=
+      </DataArray>
+      <DataArray type="Float64" Name="ModelEdgeColor" NumberOfComponents="4" NumberOfTuples="10" format="binary" RangeMin="2" RangeMax="2">
+        AQAAAACAAABAAQAAHQAAAA==eJxjYACBD/sZsNP2RNKE9NPafEppst0PANq2OFk=
+      </DataArray>
+      <DataArray type="Int32" Name="ModelEdgeVisibility" NumberOfTuples="10" format="binary" RangeMin="0" RangeMax="1">
+        AQAAAACAAAAoAAAAFAAAAA==eJxjYGBgYGRAAEYkGlkcAACAAAU=
+      </DataArray>
+      <Array type="String" Name="ModelEdgeUserName" NumberOfTuples="10" format="binary">
+        AQAAAACAAABFAAAAKAAAAA==eJxzTUlPNWQozctLzE1NYXAF8ozBpAmKmBmchyxqCSYNDRgACzQVxw==
+      </Array>
+      <DataArray type="Int64" Name="ModelFaceEdges" NumberOfTuples="23" format="binary" RangeMin="-1" RangeMax="25">
+        AQAAAACAAAC4AAAAMwAAAA==eJxjZIAAQSgtAKX/QwEjlC+Mpk4ISotBaREc+kTR5MXR1DFB+RJo8mJo6iTR+AATGSj9
+      </DataArray>
+      <DataArray type="Int32" Name="edgedirections" NumberOfTuples="23" format="binary" RangeMin="-1" RangeMax="1">
+        AQAAAACAAABcAAAAIQAAAA==eJz7////fwYgYATi/1DACOWDMAygy2ETg5kBowFmBCPn
+      </DataArray>
+      <DataArray type="Int64" Name="face material ids" NumberOfTuples="4" format="binary" RangeMin="1" RangeMax="4">
+        AQAAAACAAAAgAAAAEwAAAA==eJxjZIAAJijNDKVZoDQAAMAACw==
+      </DataArray>
+      <DataArray type="Int64" Name="ModelFaceIds" NumberOfTuples="4" format="binary" RangeMin="26" RangeMax="29">
+        AQAAAACAAAAgAAAAEwAAAA==eJyTYoAAaSgtA6VloTQACJAAbw==
+      </DataArray>
+      <DataArray type="Float64" Name="ModelFaceColor" NumberOfComponents="4" NumberOfTuples="4" format="binary" RangeMin="2" RangeMax="2">
+        AQAAAACAAACAAAAAFgAAAA==eJxjYACBD/sZsNP2OMSpJg8AGQoY8Q==
+      </DataArray>
+      <DataArray type="Int32" Name="ModelFaceVisibility" NumberOfTuples="4" format="binary" RangeMin="0" RangeMax="0">
+        AQAAAACAAAAQAAAACwAAAA==eJxjYEAFAAAQAAE=
+      </DataArray>
+      <Array type="String" Name="ModelFaceUserName" NumberOfTuples="4" format="binary">
+        AQAAAACAAAAYAAAAGAAAAA==eJxzS0xONWRwA5JGYNIYTJowAABVVAaH
+      </Array>
+      <DataArray type="Int64" Name="ModelRegionMaterials" NumberOfTuples="0" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+        AAAAAACAAAAAAAAA
+      </DataArray>
+      <DataArray type="Float64" Name="ModelRegionPointInside" NumberOfComponents="3" NumberOfTuples="0" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+        AAAAAACAAAAAAAAA
+      </DataArray>
+      <DataArray type="Int32" Name="ModelRegionPointInsideValidity" NumberOfTuples="0" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+        AAAAAACAAAAAAAAA
+      </DataArray>
+      <DataArray type="Int64" Name="ModelRegionIds" NumberOfTuples="0" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+        AAAAAACAAAAAAAAA
+      </DataArray>
+      <DataArray type="Float64" Name="ModelRegionColor" NumberOfComponents="4" NumberOfTuples="0" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+        AAAAAACAAAAAAAAA
+      </DataArray>
+      <DataArray type="Int32" Name="ModelRegionVisibility" NumberOfTuples="0" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+        AAAAAACAAAAAAAAA
+      </DataArray>
+      <Array type="String" Name="ModelRegionUserName" NumberOfTuples="0" format="binary">
+        AAAAAACAAAAAAAAA
+      </Array>
+      <DataArray type="Int64" Name="MaterialIds" NumberOfTuples="4" format="binary" RangeMin="1" RangeMax="4">
+        AQAAAACAAAAgAAAAEwAAAA==eJxjZIAAJijNDKVZoDQAAMAACw==
+      </DataArray>
+      <DataArray type="Float64" Name="MaterialColor" NumberOfComponents="4" NumberOfTuples="4" format="binary" RangeMin="2" RangeMax="2">
+        AQAAAACAAACAAAAAFgAAAA==eJxjYACBD/sZsNP2OMSpJg8AGQoY8Q==
+      </DataArray>
+      <DataArray type="Int32" Name="MaterialVisibility" NumberOfTuples="4" format="binary" RangeMin="0" RangeMax="0">
+        AQAAAACAAAAQAAAACwAAAA==eJxjYEAFAAAQAAE=
+      </DataArray>
+      <Array type="String" Name="MaterialUserName" NumberOfTuples="4" format="binary">
+        AQAAAACAAAAsAAAAHQAAAA==eJxzyc9NzMwLTi0xZHCBMY0QTGME04QBAFcpDts=
+      </Array>
+      <Array type="String" Name="AnalysisGridType" NumberOfTuples="1" format="binary">
+        AQAAAACAAAAHAAAADwAAAA==eJwzclFwdPFgAAAF/QFk
+      </Array>
+    </FieldData>
+    <Piece NumberOfPoints="32" NumberOfVerts="0" NumberOfLines="28" NumberOfStrips="0" NumberOfPolys="45">
+      <PointData>
+      </PointData>
+      <CellData>
+        <DataArray type="Int64" Name="modelfaceids" format="binary" RangeMin="16" RangeMax="29">
+          AQAAAACAAABIAgAAOgAAAA==eJwTYIAAATRaEI2GiQuh0WJotAgaLYyDFsdBi6LRElBaEo2WwCGPzpeikJamEy1DJi07SGgAlbEHJw==
+        </DataArray>
+      </CellData>
+      <Points>
+        <DataArray type="Float64" Name="Points" NumberOfComponents="3" format="binary" RangeMin="1" RangeMax="9.2195444573">
+          AQAAAACAAAAAAwAAdAAAAA==eJyFkDEOgCAQBK+0NMTCwsL4Efj/a3yCjXuEkY10N2xmDyKG08bxrjE9yU1+BVeOvoU58jbnG/inD5y94uwXp58zOf2ZNx72lp9e8t14xPkf4vQc78z9xbm/OHtPzOT0Z954nJ/vukxvctzrH/o+D66UGco=
+        </DataArray>
+      </Points>
+      <Verts>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="1e+299" RangeMax="-1e+299">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Verts>
+      <Lines>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="0" RangeMax="30">
+          AQAAAACAAADAAQAAXQAAAA==eJxdjkkKgDAQBCPBBdwlrhj//0wPdh+suRRdDD0TwjeFGMN/7EuxQq7hnSP2GrATe+QBfoSf4Z0nsAX914K+Hf6Gd06g7/rvQ1zFDbzEB70Z3nsnejO877wptgNo
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="2" RangeMax="56">
+          AQAAAACAAADgAAAAQgAAAA==eJwtxUEKQEAAAEBJkiRJkrRJkiRJkv+/zMHMZeLolzh15tyFS1eu3bh1596Dg0dPnr149ebdh09fvv349Qf+oAMt
+        </DataArray>
+      </Lines>
+      <Strips>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="0" RangeMax="30">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="2" RangeMax="56">
+          AAAAAACAAAAAAAAA
+        </DataArray>
+      </Strips>
+      <Polys>
+        <DataArray type="Int64" Name="connectivity" format="binary" RangeMin="0" RangeMax="30">
+          AQAAAACAAAA4BAAAqwAAAA==eJx10EsSgjAUBVFEREE+GlS+yv536cD0wK5KJq/uuSmSkGW/dYgzz/4X+ah9hXr8pL6Ql3Jyromf5WTuw3cvcVZycql9TZytnFxp4p2+R18rd/Ja3mve47xpf59w8lVO5j+V6nHuEXQOeUj4qJ68yQf5Q07m3b16fNf53LtVjzfyVj6p3+VPOTkov+RBPiqvCV8SPXlT/sgX+Sp/q5/l7Jvks5zM+7+A/AhG
+        </DataArray>
+        <DataArray type="Int64" Name="offsets" format="binary" RangeMin="2" RangeMax="56">
+          AQAAAACAAABoAQAAZgAAAA==eJwtxdEGwgAAAMARY8SIiIgRERERIyJixIgRIyJijBgxYkTst3vo7uUGwV/oyEPHHnnsiaeeOfHcCy+98tobb516570PPjrzybnPLnxx6atvvvvhyrWfbvxy67c7f/x17x/x2wwi
+        </DataArray>
+      </Polys>
+    </Piece>
+  </PolyData>
+</VTKFile>
