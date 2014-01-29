@@ -8,6 +8,9 @@ It contains the following top-leve directories:
 + `cgm` - Datasets used to test SMTK's bridge to
   [CGMA](http://trac.mcs.anl.gov/projects/ITAPS/wiki/CGM).
 + `cmb` - Datasets used to test SMTK's bridge to CMB.
++ `smtk` - Resource, attribute, and model files in SMTK-native formats.
+
+## Dataset Descriptions
 
 The following datasets come from the CGMA repository's test data:
 
