@@ -55,6 +55,12 @@
           </Categories>
           <DefaultValue>Default</DefaultValue>
         </String>
+        <String Name="StringItem3" NumberOfRequiredValues="4" >
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DefaultValue>Default</DefaultValue>
+        </String>
       </ItemDefinitions>
     </AttDef>
     <AttDef Type="ExpDef" BaseType="" Version="0" Unique="true" Associations="">
