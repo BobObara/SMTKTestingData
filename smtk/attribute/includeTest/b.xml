@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--Created by XmlV1StringWriter-->
+<SMTK_AttributeManager Version="1">
+  <Includes>
+    <File>includeTest/a.xml</File>
+  </Includes>
+  <!--**********  Category and Analysis Infomation ***********-->
+  <Categories>
+    <Cat>Constituent</Cat>
+    <Cat>Flow</Cat>
+    <Cat>General</Cat>
+    <Cat>Heat</Cat>
+    <Cat>Veg</Cat>
+  </Categories>
+  <!--**********  Attribute Definitions ***********-->
+  <Definitions>
+    <AttDef Type="Derived1" BaseType="BaseDef" Unique="true">
+      <ItemDefinitions>
+        <Double Name="DoubleItem1">
+          <Categories>
+            <Cat>Veg</Cat>
+          </Categories>
+          <ExpressionType>ExpDef</ExpressionType>
+        </Double>
+        <Double Name="DoubleItem2">
+          <Categories>
+            <Cat>Constituent</Cat>
+          </Categories>
+          <DefaultValue>-35.2</DefaultValue>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="Derived2" BaseType="Derived1" Unique="true" >
+      <ItemDefinitions>
+        <String Name="StringItem1" Extensible="true" >
+          <Categories>
+            <Cat>Flow</Cat>
+          </Categories>
+        </String>
+        <String Name="StringItem2" Extensible="true" NumberOfRequiredValues="0" MaxNumberOfValues="5">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DefaultValue>Default</DefaultValue>
+        </String>
+        <String Name="StringItem3" NumberOfRequiredValues="4" >
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DefaultValue>Default</DefaultValue>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="ExpDef" BaseType="" Version="0" Unique="true" Associations="">
+      <BriefDescription>Sample Expression</BriefDescription>
+      <DetailedDescription>Sample Expression for testing
+There is not much here!</DetailedDescription>
+      <ItemDefinitions>
+        <String Name="Expression String">
+          <DefaultValue>sample</DefaultValue>
+        </String>
+        <String Name="Aux String"  />
+      </ItemDefinitions>
+    </AttDef>
+  </Definitions>
+</SMTK_AttributeManager>

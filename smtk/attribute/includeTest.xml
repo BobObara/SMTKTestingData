@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--Created by XmlV1StringWriter-->
+<SMTK_AttributeManager Version="1">
+  <Includes>
+    <File>includeTest/b.xml</File>
+    <File>includeTest/a.xml</File>
+  </Includes>
+  <!--**********  Category and Analysis Infomation ***********-->
+  <Categories>
+    <Cat>Constituent</Cat>
+    <Cat>Flow</Cat>
+    <Cat>General</Cat>
+    <Cat>Heat</Cat>
+    <Cat>Veg</Cat>
+  </Categories>
+  <!--**********  Attribute Definitions ***********-->
+  <Definitions>
+    <AttDef Type="Derived3" BaseType="Derived1" Unique="true" >
+      <ItemDefinitions>
+        <Group Name="GroupItem1" Extensible="true" >
+          <ItemDefinitions>
+            <Int Name="GIntItem1">
+          <Categories>
+            <Cat>Flow</Cat>
+          </Categories>
+            </Int>
+            <Int Name="GIntItem2">
+              <Categories>
+                <Cat>Heat</Cat>
+              </Categories>
+              <DefaultValue>10</DefaultValue>
+            </Int>
+          </ItemDefinitions>
+        </Group>
+        <Group Name="GroupItem2" Extensible="true" NumberOfRequiredGroups="0" MaxNumberOfGroups="5">
+          <ItemDefinitions>
+            <Double Name="GDoubleItem1">
+              <Categories>
+                <Cat>Veg</Cat>
+              </Categories>
+            </Double>
+            <Double Name="GDoubleItem2">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <DefaultValue>123.456</DefaultValue>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+        <Group Name="GroupItem3" NumberOfRequiredGroups="4" >
+          <ItemDefinitions>
+            <String Name="GStringItem1" Extensible="true" >
+              <Categories>
+                <Cat>Flow</Cat>
+              </Categories>
+            </String>
+            <String Name="GStringItem2" Extensible="true" NumberOfRequiredValues="0" MaxNumberOfValues="5">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <DefaultValue>Default</DefaultValue>
+            </String>
+            <String Name="GStringItem3" NumberOfRequiredValues="4" >
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <DefaultValue>Default</DefaultValue>
+            </String>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+  </Definitions>
+  <!--********** Workflow Views ***********-->
+  <RootView Title="">
+    <DefaultColor>1, 1, 0.5, 1</DefaultColor>
+    <InvalidColor>1, 0.5, 0.5, 1</InvalidColor>
+    <AdvancedFontEffects>Bold="1" Italic="0"</AdvancedFontEffects>
+  </RootView>
+  <ModelInfo />
+</SMTK_AttributeManager>

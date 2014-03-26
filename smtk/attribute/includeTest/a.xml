@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--Created by XmlV1StringWriter-->
+<SMTK_AttributeManager Version="1">
+  <!--**********  Category and Analysis Infomation ***********-->
+  <Categories>
+    <Cat>Constituent</Cat>
+    <Cat>Flow</Cat>
+    <Cat>General</Cat>
+    <Cat>Heat</Cat>
+    <Cat>Veg</Cat>
+  </Categories>
+  <!--**********  Attribute Definitions ***********-->
+  <Definitions>
+    <AttDef Type="BaseDef" BaseType=""  Unique="true" Associations="">
+      <ItemDefinitions>
+        <Int Name="IntItem1">
+          <Categories>
+            <Cat>Flow</Cat>
+          </Categories>
+        </Int>
+        <Int Name="IntItem2">
+          <Categories>
+            <Cat>Heat</Cat>
+          </Categories>
+          <DefaultValue>10</DefaultValue>
+        </Int>
+      </ItemDefinitions>
+    </AttDef>
+  </Definitions>
+</SMTK_AttributeManager>
