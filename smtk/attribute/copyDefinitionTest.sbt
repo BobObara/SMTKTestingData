@@ -70,6 +70,10 @@ STILL MISSING/TODO:
         <AttributeRef Name="Reference" Label="AttributeRef (FirstConcrete)" NumberOfRequiredValues="1">
           <AttDef>FirstConcrete</AttDef>
         </AttributeRef>
+        <MODEL_ENTITY Name="ModelFace" NumberOfRequiredValues="1">
+          <!-- Model face is 0x104 == 404 decimal-->
+          <MembershipMask>404</MembershipMask>
+        </MODEL_ENTITY>
       </ItemDefinitions>
     </AttDef>
   </Definitions>
