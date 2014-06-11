@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!--Created by XmlV1StringWriter-->
+<SMTK_AttributeManager Version="1">
+  <!--**********  Category and Analysis Information ***********-->
+  <!--**********  Attribute Definitions ***********-->
+  <Definitions>
+    <AttDef Type="CommonBase" BaseType="" Version="0" Abstract="true" Unique="true" Associations="v">
+      <ItemDefinitions>
+        <Double Name="CommonDouble" Label="Floating Pt Val" Version="0" NumberOfRequiredValues="1">
+          <DefaultValue>3.14159</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="false">0</Min>
+          </RangeInfo>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="FirstConcrete" BaseType="CommonBase" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Int Name="AdvancedInt" Version="73" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <BriefDescription>This is a brief description field.</BriefDescription>
+        </Int>
+        <String Name="OptionalStrings" Version="0" NumberOfRequiredValues="2">
+          <DetailedDescription>This is a "detailed" description.</DetailedDescription>
+          <ComponentLabels>
+            <Label>1st</Label>
+            <Label>2nd</Label>
+          </ComponentLabels>
+        </String>
+        <Void Name="Checkbox" Version="0" />
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="AnotherAbstractBase" BaseType="CommonBase" Version="42" Abstract="true" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Double Name="DoubleExpression" Version="0" NumberOfRequiredValues="1">
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="SecondConcrete" BaseType="AnotherAbstractBase" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Int Name="SelectionList" Version="0" NumberOfRequiredValues="1">
+          <DiscreteInfo DefaultIndex="2">
+            <Value Enum="Choice A">0</Value>
+            <Value Enum="Choice B">1</Value>
+            <Value Enum="Choice C">2</Value>
+          </DiscreteInfo>
+        </Int>
+        <AttributeRef Name="Reference" Label="AttributeRef (FirstConcrete)" Version="0" NumberOfRequiredValues="1">
+          <AttDef>FirstConcrete</AttDef>
+          <ComponentLabels>
+            <Label />
+          </ComponentLabels>
+        </AttributeRef>
+        <MODEL_ENTITY Name="ModelFace" Version="0" NumberOfRequiredValues="1">
+          <MembershipMask>404</MembershipMask>
+          <ComponentLabels>
+            <Label />
+          </ComponentLabels>
+        </MODEL_ENTITY>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="PolyLinearFunction" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="ValuePairs" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <Double Name="X" Version="0" NumberOfRequiredValues="0" Extensible="true" />
+            <Double Name="Y" Version="0" NumberOfRequiredValues="0" Extensible="true" />
+          </ItemDefinitions>
+        </Group>
+        <String Name="NameOfExpression" Version="0" NumberOfRequiredValues="1" />
+      </ItemDefinitions>
+    </AttDef>
+  </Definitions>
+  <!--**********  Attribute Instances ***********-->
+  <Attributes>
+    <Att Name="FirstConcrete-0" Type="FirstConcrete" ID="0">
+      <Items>
+        <Double Name="CommonDouble">2.78218</Double>
+        <Int Name="AdvancedInt">42</Int>
+        <String Name="OptionalStrings">
+          <Values>
+            <Val Ith="0">Lorem</Val>
+            <Val Ith="1">ipsum</Val>
+          </Values>
+        </String>
+        <Void Name="Checkbox" />
+      </Items>
+    </Att>
+    <Att Name="SecondConcrete-0" Type="SecondConcrete" ID="1">
+      <Items>
+        <Double Name="CommonDouble">0.001</Double>
+        <Double Name="DoubleExpression" Expression="true">PolyLinearFunction-0</Double>
+        <Int Name="SelectionList" Discrete="true">1</Int>
+        <AttributeRef Name="Reference">
+          <Val>FirstConcrete-0</Val>
+        </AttributeRef>
+        <MODEL_ENTITY Name="ModelFace" />
+      </Items>
+    </Att>
+    <Att Name="PolyLinearFunction-0" Type="PolyLinearFunction" ID="2">
+      <Items>
+        <Group Name="ValuePairs">
+          <Double Name="X" NumberOfValues="2">
+            <Values>
+              <Val Ith="0">0</Val>
+              <Val Ith="1">10</Val>
+            </Values>
+          </Double>
+          <Double Name="Y" NumberOfValues="2">
+            <Values>
+              <Val Ith="0">1</Val>
+              <Val Ith="1">2</Val>
+            </Values>
+          </Double>
+        </Group>
+        <String Name="NameOfExpression">Straight Line</String>
+      </Items>
+    </Att>
+  </Attributes>
+  <!--********** Workflow Views ***********-->
+  <RootView Title="">
+    <DefaultColor>1, 1, 0.5, 1</DefaultColor>
+    <InvalidColor>1, 0.5, 0.5, 1</InvalidColor>
+    <AdvancedFontEffects>Bold="1" Italic="0"</AdvancedFontEffects>
+    <MaxValueLabelLength>200</MaxValueLabelLength>
+    <MinValueLabelLength>50</MinValueLabelLength>
+    <InstancedView Title="FirstConcrete">
+      <InstancedAttributes>
+        <Att Type="FirstConcrete">FirstConcrete-0</Att>
+      </InstancedAttributes>
+    </InstancedView>
+    <InstancedView Title="SecondConcrete">
+      <InstancedAttributes>
+        <Att Type="SecondConcrete">SecondConcrete-0</Att>
+      </InstancedAttributes>
+    </InstancedView>
+    <InstancedView Title="PolyLinearFunction">
+      <InstancedAttributes>
+        <Att Type="PolyLinearFunction">PolyLinearFunction-0</Att>
+      </InstancedAttributes>
+    </InstancedView>
+  </RootView>
+  <ModelInfo />
+</SMTK_AttributeManager>
