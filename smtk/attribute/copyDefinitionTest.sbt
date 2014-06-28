@@ -4,7 +4,7 @@
 Covers many of the attribute features:
 Types: double, group, integer, string, void
 Options: AdvanceLevel, Abstract, Associations, Discrete, Extensible,
-  IsOptional, Label, NumberOfRequiredValues, Unique, Units, Version
+  Optional, Label, NumberOfRequiredValues, Unique, Units, Version
 Also: expression, inheritance, RangeInfo, DefaultValue
 STILL MISSING/TODO:
   Categories
@@ -30,7 +30,7 @@ STILL MISSING/TODO:
         <Int Name="AdvancedInt" AdvanceLevel="1" Version="73">
           <BriefDescription>This is a brief description field.</BriefDescription>
         </Int>
-        <String Name="OptionalStrings" IsOptional="true" NumberOfRequiredValues="2">
+        <String Name="OptionalStrings" Optional="true" NumberOfRequiredValues="2">
           <ComponentLabels>
             <Label>1st</Label>
             <Label>2nd</Label>
