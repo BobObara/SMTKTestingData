@@ -51,12 +51,12 @@
             <Label />
           </ComponentLabels>
         </AttributeRef>
-        <MODEL_ENTITY Name="ModelFace" Version="0" NumberOfRequiredValues="1">
+        <ModelEntity Name="ModelFace" Version="0" NumberOfRequiredValues="1">
           <MembershipMask>404</MembershipMask>
           <ComponentLabels>
             <Label />
           </ComponentLabels>
-        </MODEL_ENTITY>
+        </ModelEntity>
       </ItemDefinitions>
     </AttDef>
     <AttDef Type="PolyLinearFunction" BaseType="" Version="0" Unique="true" Associations="">
@@ -94,7 +94,7 @@
         <AttributeRef Name="Reference">
           <Val>FirstConcrete-0</Val>
         </AttributeRef>
-        <MODEL_ENTITY Name="ModelFace" />
+        <ModelEntity Name="ModelFace" />
       </Items>
     </Att>
     <Att Name="PolyLinearFunction-0" Type="PolyLinearFunction" ID="2">
