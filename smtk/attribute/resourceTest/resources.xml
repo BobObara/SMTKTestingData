@@ -1,0 +1,2031 @@
+<?xml version="1.0"?>
+<cmb-resources>
+  <attribute role="instance" id="att0">
+      <include href="ShallowWater2D.sbi"/>
+  </attribute>
+  <attribute role="template" id="att1">
+<!--Created by XmlV1StringWriter-->
+<SMTK_AttributeManager Version="1">
+  <!--**********  Category and Analysis Information ***********-->
+  <Categories>
+    <Cat>Energy Equation</Cat>
+    <Cat>General</Cat>
+    <Cat>Incompressible Navier-Stokes</Cat>
+  </Categories>
+  <Analyses>
+    <Analysis Type="Incompressible Navier-Stokes Analysis">
+      <Cat>General</Cat>
+      <Cat>Incompressible Navier-Stokes</Cat>
+    </Analysis>
+    <Analysis Type="NS and Energy Equation Analysis">
+      <Cat>Energy Equation</Cat>
+      <Cat>General</Cat>
+      <Cat>Incompressible Navier-Stokes</Cat>
+    </Analysis>
+  </Analyses>
+  <!--**********  Attribute Definitions ***********-->
+  <Definitions>
+    <AttDef Type="BasicTurbulenceModel" Label="Turbulence Model" BaseType="" Version="0" Unique="false" Associations="">
+      <ItemDefinitions>
+        <String Name="Method" Label="Turbulence Model" Version="0" Optional="true" IsEnabledByDefault="false" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>(tmodel or turbulence)</BriefDescription>
+          <ChildrenDefinitions>
+            <Double Name="c_s" Label="Smagorinsky Model Constant" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <BriefDescription>Smagorinsky model constant.</BriefDescription>
+              <DefaultValue>0.18</DefaultValue>
+            </Double>
+            <Double Name="c_w" Label="WALE Model Constant" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <BriefDescription>WALE model constant.</BriefDescription>
+              <DefaultValue>0.18</DefaultValue>
+            </Double>
+            <Double Name="prandtl" Label="Turbulent Prandtl Number" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <DefaultValue>0.889</DefaultValue>
+            </Double>
+            <Double Name="schmidt" Label="Turbulent Schmidt Number" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <DefaultValue>1</DefaultValue>
+            </Double>
+            <Void Name="timescale_limiter" Label="Time Scale Limiter" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+            </Void>
+          </ChildrenDefinitions>
+          <DiscreteInfo>
+            <Value Enum="Spalart-Allmaras">spalart_allmaras</Value>
+            <Value Enum="Detached Eddy Spalart-Allmaras">spalart_allmaras_des</Value>
+            <Structure>
+              <Value Enum="Smagorinsky">smagorinsky</Value>
+              <Items>
+                <Item>c_s</Item>
+                <Item>prandtl</Item>
+                <Item>schmidt</Item>
+              </Items>
+            </Structure>
+            <Structure>
+              <Value Enum="WALE">WALE</Value>
+              <Items>
+                <Item>c_w</Item>
+                <Item>prandtl</Item>
+                <Item>schmidt</Item>
+              </Items>
+            </Structure>
+            <Structure>
+              <Value Enum="RNG k-e">rng_ke</Value>
+              <Items>
+                <Item>timescale_limiter</Item>
+              </Items>
+            </Structure>
+            <Value Enum="SST k-w (under development)">sst_kw</Value>
+            <Value Enum="K^sgs (under development)">ksgs</Value>
+            <Value Enum="LDKM k^sgs (under development)">ldkm_ksgs</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="BodyForce" BaseType="" Version="0" Abstract="true" Unique="false" Associations="r" />
+    <AttDef Type="GravityForce" Label="Gravity Force" BaseType="BodyForce" Version="0" Unique="true" Associations="r">
+      <ItemDefinitions>
+        <Double Name="GravityForce" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(body_force::lcid)</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="3">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(body_force::{fx,fy,fz})</BriefDescription>
+          <ComponentLabels>
+            <Label>X</Label>
+            <Label>Y</Label>
+            <Label>Z</Label>
+          </ComponentLabels>
+          <DefaultValue>0</DefaultValue>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="BoussinesqForce" Label="Boussinesq Force" BaseType="BodyForce" Version="0" Unique="true" Associations="r">
+      <ItemDefinitions>
+        <Double Name="BoussinesqForce" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(boussinesqforce::lcid)</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="3">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(boussinesqforce::{gx,gy,gz})</BriefDescription>
+          <ComponentLabels>
+            <Label>X</Label>
+            <Label>Y</Label>
+            <Label>Z</Label>
+          </ComponentLabels>
+          <DefaultValue>0</DefaultValue>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="porous_drag" Label="Porous Drag" BaseType="BodyForce" Version="0" Unique="true" Associations="r">
+      <ItemDefinitions>
+        <Double Name="porous_drag" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(porous_drag::lcid)</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(porous_drag::amp)</BriefDescription>
+          <DefaultValue>1</DefaultValue>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="HeatSource" Label="Heat Source" BaseType="BodyForce" Version="0" Unique="true" Associations="r">
+      <ItemDefinitions>
+        <Double Name="Heat Source" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(heat_source::lcid)</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(heat_source::Q)</BriefDescription>
+          <DefaultValue>0</DefaultValue>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="BoundaryCondition" BaseType="" Version="0" Abstract="true" Unique="false" Associations="f" />
+    <AttDef Type="EnthalpyBoundaryCondition" Label="Enthalpy" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(enthalpybc::sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(enthalpybc::sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="Turbulent Dissipation" Label="Turbulent Dissipation" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>Used with the RNG k-e turbulence model (epsbc::sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>Used with the RNG k-e turbulence model (epsbc::sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="distancebc" Label="Distance Function" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(distancebc::sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(distancebc::sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="Pressure" Label="Pressure" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(pressurebc::sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(pressurebc::sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="Temperature" Label="Temperature" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(temperaturebc::sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(temperaturebc::sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="TurbulentViscosity" Label="Turbulent Viscosity" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>Used with the RNG k-e turbulence model (turbnubc::sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>Used with the RNG k-e turbulence model (turbnubc::sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="VelXBoundaryCondition" Label="X Velocity" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(velocitybc::velx sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(velocitybc::velx sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="SymmetryVelXBoundaryCondition" Label="X Symmetry Velocity" BaseType="VelXBoundaryCondition" Version="0" Unique="true" Associations="f" />
+    <AttDef Type="VelYBoundaryCondition" Label="Y Velocity" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(velocitybc::vely sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(velocitybc::vely sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="SymmetryVelYBoundaryCondition" Label="Y Symmetry Velocity" BaseType="VelYBoundaryCondition" Version="0" Unique="true" Associations="f" />
+    <AttDef Type="VelZBoundaryCondition" Label="Z Velocity" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(velocitybc::velz sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(velocitybc::velz sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="SymmetryVelZBoundaryCondition" Label="Z Symmetry Velocity" BaseType="VelZBoundaryCondition" Version="0" Unique="true" Associations="f" />
+    <AttDef Type="HeatFlux" Label="Heat Flux" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Double Name="LoadCurve" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(heatflux::sideset [loadCurveId])</BriefDescription>
+          <ExpressionType>PolyLinearFunction</ExpressionType>
+        </Double>
+        <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(heatflux::sideset [amplitude])</BriefDescription>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="passiveoutflowbc" Label="Passive Outflow" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Void Name="void" Label="Not used - do not show" Version="0" AdvanceLevel="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(passiveoutflowbc::sideset)</BriefDescription>
+        </Void>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="pressureoutflowbc" Label="Pressure Outflow" BaseType="BoundaryCondition" Version="0" Unique="true" Associations="f">
+      <ItemDefinitions>
+        <Void Name="void" Label="Not used - do not show" Version="0" AdvanceLevel="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(pressureoutflowbc::sideset)</BriefDescription>
+        </Void>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="ExecutionControl" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Int Name="ExecutionControl" Label="Execution Control Frequency Checking" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>Frequency of checking execution control file (exe_control)</BriefDescription>
+          <DefaultValue>0</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">0</Min>
+          </RangeInfo>
+        </Int>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="InitialConditions" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="InitialConditions" Label="Initial Conditions" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <Double Name="Velocity" Label="Initial velocity" Version="0" NumberOfRequiredValues="3">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <BriefDescription>(initial::{velx,vely,velz})</BriefDescription>
+              <ComponentLabels>
+                <Label>X</Label>
+                <Label>Y</Label>
+                <Label>Z</Label>
+              </ComponentLabels>
+              <DefaultValue>0</DefaultValue>
+            </Double>
+            <Double Name="tke" Label="Initial turbulent kinetic energy" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <BriefDescription>Turbulent kinetic energy for k-e and k-w models (initial::tke)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+              </RangeInfo>
+            </Double>
+            <Double Name="itdr" Label="Initial turbulent dissipation rate" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <BriefDescription>Initial turbulent dissipation rate for k-e models (initial::eps)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+              </RangeInfo>
+            </Double>
+            <Double Name="idts" Label="Inverse dissipation time scale" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <BriefDescription>Initial turbulent dissipation time scale for k-w models (initial::omega)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+              </RangeInfo>
+            </Double>
+            <Double Name="tv" Label="Turbulent viscosity" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Incompressible Navier-Stokes</Cat>
+              </Categories>
+              <BriefDescription>Turbulent viscosity for Spalart-Allmaras and DES models (initial::turbnu)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+              </RangeInfo>
+            </Double>
+            <Double Name="temperature" Label="Temperature" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Energy Equation</Cat>
+              </Categories>
+              <BriefDescription>(initial::temperature)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+            </Double>
+            <Double Name="internalenergy" Label="Internal Energy" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Energy Equation</Cat>
+              </Categories>
+              <BriefDescription>(initial::int_energy)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+            </Double>
+            <Double Name="enthalpy" Label="Enthalpy" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>Energy Equation</Cat>
+              </Categories>
+              <BriefDescription>(initial::enthalpy)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="LoadBalancer" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <String Name="Method" Label="Load Balance Method" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>(load_balance::method)</BriefDescription>
+          <DiscreteInfo DefaultIndex="4">
+            <Value Enum="RCB">rcb</Value>
+            <Value Enum="RIB">rib</Value>
+            <Value Enum="SFC">sfc</Value>
+            <Value Enum="Hypergraph">hg</Value>
+            <Value Enum="SFC and HG">sfc_and_hg</Value>
+          </DiscreteInfo>
+        </String>
+        <Void Name="Load Balance Diagnostics" Label="Load Balance Diagnostics" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>Load Balance Verbose Level (load_balance::diagnostics)</BriefDescription>
+        </Void>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="Material" Label="Material" BaseType="" Version="0" Unique="true" Associations="r">
+      <ItemDefinitions>
+        <Double Name="Density" Label="Density" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>(material::rho)</BriefDescription>
+          <DefaultValue>1</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="false">0</Min>
+          </RangeInfo>
+        </Double>
+        <String Name="specificheattype" Label="Specific Heat Type" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(material::Cp or material::Cv type)</BriefDescription>
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="Constant Pressure">Cp</Value>
+            <Value Enum="Constant Volume">Cv</Value>
+          </DiscreteInfo>
+        </String>
+        <Double Name="specificheatvalue" Label="Specific Heat Value" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(material::Cp or material::Cv value)</BriefDescription>
+          <RangeInfo>
+            <Min Inclusive="true">0</Min>
+          </RangeInfo>
+        </Double>
+        <Double Name="k" Label="Thermal conductivity" Version="0" NumberOfRequiredValues="6">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>Symmetric thermal conductivity tensor (material::{k11,k12,k13,k22,k23,k33})</BriefDescription>
+          <ComponentLabels>
+            <Label>11</Label>
+            <Label>12</Label>
+            <Label>13</Label>
+            <Label>22</Label>
+            <Label>23</Label>
+            <Label>33</Label>
+          </ComponentLabels>
+        </Double>
+        <Double Name="mu" Label="Mu" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Incompressible Navier-Stokes</Cat>
+          </Categories>
+          <BriefDescription>Molecular viscosity (material::mu)</BriefDescription>
+          <DefaultValue>1</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="false">0</Min>
+          </RangeInfo>
+        </Double>
+        <Double Name="beta" Label="Beta" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>Coefficient of thermal expansion (material::beta)</BriefDescription>
+          <DefaultValue>0</DefaultValue>
+        </Double>
+        <Double Name="Tref" Label="Material Reference Temperature" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(material::Tref)</BriefDescription>
+          <DefaultValue>0</DefaultValue>
+        </Double>
+        <Void Name="rigid" Label="Rigid body specification" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>Rigid body material specification for native conjugate heat transfer (material::rigid)</BriefDescription>
+        </Void>
+        <Double Name="velxyz" Label="Rigid body velocity" Version="0" NumberOfRequiredValues="3">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(material::{velx,vely,velz})</BriefDescription>
+          <ComponentLabels>
+            <Label>1</Label>
+            <Label>2</Label>
+            <Label>3</Label>
+          </ComponentLabels>
+          <DefaultValue>0</DefaultValue>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="Output" BaseType="" Version="0" Unique="false" Associations="">
+      <ItemDefinitions>
+        <Group Name="RestartOutput" Label="Restart Output" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <Int Name="frequency" Label="Frequency" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Output dump file frequency. 0 implies do not output. (dump)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+              </RangeInfo>
+            </Int>
+            <String Name="type" Label="Type" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Output dump format (filetype)</BriefDescription>
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="Serial">serial</Value>
+                <Value Enum="Distributed">distributed</Value>
+              </DiscreteInfo>
+            </String>
+          </ItemDefinitions>
+        </Group>
+        <Group Name="FieldOutput" Label="Field Output" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <Int Name="frequency" Label="Frequency" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Output plot file frequency. 0 implies do not output. (plti)</BriefDescription>
+              <DefaultValue>20</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+              </RangeInfo>
+            </Int>
+            <String Name="type" Label="Type" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Output field format (pltype)</BriefDescription>
+              <DiscreteInfo DefaultIndex="1">
+                <Value Enum="GMV ASCII">gmv_ascii</Value>
+                <Value Enum="ExodusII">exodusii</Value>
+                <Value Enum="ExodusII (64 bit)">exodusii64</Value>
+                <Value Enum="ExodusII (HDF5)">exodusii_hdf5</Value>
+                <Value Enum="ExodusII (64 bit HDF5)">exodusii64_hdf5</Value>
+                <Value Enum="VTK ASCII">vtk_ascii</Value>
+              </DiscreteInfo>
+            </String>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="SimExpression" BaseType="" Version="0" Abstract="true" Unique="true" Associations="" />
+    <AttDef Type="SimInterpolation" BaseType="SimExpression" Version="0" Abstract="true" Unique="true" Associations="" />
+    <AttDef Type="PolyLinearFunction" Label="Expression" BaseType="SimInterpolation" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="ValuePairs" Label="Value Pairs" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <Double Name="X" Version="0" NumberOfRequiredValues="0">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+            </Double>
+            <Double Name="Value" Version="0" NumberOfRequiredValues="0">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+        <String Name="Sim1DLinearExp" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="StatusInformation" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Int Name="minmaxfrequency" Label="Interval to report min/max velocity values" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>(ttyi)</BriefDescription>
+          <DefaultValue>10</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">0</Min>
+          </RangeInfo>
+        </Int>
+        <Int Name="tifrequency" Label="Time history write frequency" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>Interval to write time-history data to the time-history files (thti)</BriefDescription>
+          <DefaultValue>1</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">0</Min>
+          </RangeInfo>
+        </Int>
+        <String Name="PrintLevel" Label="ASCII Print Level" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>Controls the amount of data written to the ASCII (human-readable) output file (prtlevel)</BriefDescription>
+          <ChildrenDefinitions>
+            <Int Name="hcfrequency" Label="ASCII Verbose Print Interval" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(prti)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+              </RangeInfo>
+            </Int>
+          </ChildrenDefinitions>
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="param">param</Value>
+            <Value Enum="results">results</Value>
+            <Structure>
+              <Value Enum="verbose">verbose</Value>
+              <Items>
+                <Item>hcfrequency</Item>
+              </Items>
+            </Structure>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="TempStatVarOutput" BaseType="" Version="0" Abstract="true" Unique="false" Associations="" />
+    <AttDef Type="NodeTempStatVarOutput" Label="NodeTempStatVarOutput" BaseType="TempStatVarOutput" Version="0" Unique="false" Associations="">
+      <ItemDefinitions>
+        <String Name="varname" Label="Variable Name" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DiscreteInfo>
+            <Value Enum="&lt;density&gt;">&lt;density&gt;</Value>
+            <Value Enum="&lt;pressure&gt;">&lt;pressure&gt;</Value>
+            <Value Enum="&lt;velocity&gt;">&lt;velocity&gt;</Value>
+            <Value Enum="&lt;temperature&gt;">&lt;temperature&gt;</Value>
+            <Value Enum="&lt;enstrophy&gt;">&lt;enstrophy&gt;</Value>
+            <Value Enum="&lt;helicity&gt;">&lt;helicity&gt;</Value>
+            <Value Enum="&lt;vorticity&gt;">&lt;vorticity&gt;</Value>
+            <Value Enum="&lt;pressure',pressure'&gt;">&lt;pressure',pressure'&gt;</Value>
+            <Value Enum="&lt;temp',temp'&gt;">&lt;temp',temp'&gt;</Value>
+            <Value Enum="&lt;density',pressure'&gt;">&lt;density',pressure'&gt;</Value>
+            <Value Enum="&lt;pressure',velocity'&gt;">&lt;pressure',velocity'&gt;</Value>
+            <Value Enum="rms-pressure">rms-pressure</Value>
+            <Value Enum="rms-temp">rms-temp</Value>
+            <Value Enum="tke">tke</Value>
+            <Value Enum="reynoldsstress">reynoldsstress</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="ElemTempStatVarOutput" Label="ElemTempStatVarOutput" BaseType="TempStatVarOutput" Version="0" Unique="false" Associations="">
+      <ItemDefinitions>
+        <String Name="varname" Label="Variable Name" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DiscreteInfo>
+            <Value Enum="&lt;density&gt;">&lt;density&gt;</Value>
+            <Value Enum="&lt;pressure&gt;">&lt;pressure&gt;</Value>
+            <Value Enum="&lt;velocity&gt;">&lt;velocity&gt;</Value>
+            <Value Enum="&lt;temperature&gt;">&lt;temperature&gt;</Value>
+            <Value Enum="&lt;enstrophy&gt;">&lt;enstrophy&gt;</Value>
+            <Value Enum="&lt;helicity&gt;">&lt;helicity&gt;</Value>
+            <Value Enum="&lt;vorticity&gt;">&lt;vorticity&gt;</Value>
+            <Value Enum="&lt;turbnu&gt;">&lt;turbnu&gt;</Value>
+            <Value Enum="&lt;pressure',pressure'&gt;">&lt;pressure',pressure'&gt;</Value>
+            <Value Enum="&lt;temp',temp'&gt;">&lt;temp',temp'&gt;</Value>
+            <Value Enum="&lt;density',pressure'&gt;">&lt;density',pressure'&gt;</Value>
+            <Value Enum="&lt;pressure',velocity'&gt;">&lt;pressure',velocity'&gt;</Value>
+            <Value Enum="rms-pressure">rms-pressure</Value>
+            <Value Enum="rms-temp">rms-temp</Value>
+            <Value Enum="tke">tke</Value>
+            <Value Enum="reynoldsstress">reynoldsstress</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="SideSetTempStatVarOutput" Label="SideSetTempStatVarOutput" BaseType="TempStatVarOutput" Version="0" Unique="false" Associations="f">
+      <ItemDefinitions>
+        <String Name="varname" Label="Variable Name" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DiscreteInfo>
+            <Value Enum="&lt;density&gt;">&lt;density&gt;</Value>
+            <Value Enum="&lt;pressure&gt;">&lt;pressure&gt;</Value>
+            <Value Enum="&lt;velocity&gt;">&lt;velocity&gt;</Value>
+            <Value Enum="&lt;temperature&gt;">&lt;temperature&gt;</Value>
+            <Value Enum="&lt;heatflux&gt;">&lt;heatflux&gt;</Value>
+            <Value Enum="&lt;straction&gt;">&lt;straction&gt;</Value>
+            <Value Enum="&lt;ntraction&gt;">&lt;ntraction&gt;</Value>
+            <Value Enum="&lt;traction&gt;">&lt;traction&gt;</Value>
+            <Value Enum="&lt;pressure',pressure'&gt;">&lt;pressure',pressure'&gt;</Value>
+            <Value Enum="&lt;temp',temp'&gt;">&lt;temp',temp'&gt;</Value>
+            <Value Enum="&lt;density',pressure'&gt;">&lt;density',pressure'&gt;</Value>
+            <Value Enum="&lt;pressure',velocity'&gt;">&lt;pressure',velocity'&gt;</Value>
+            <Value Enum="rms-pressure">rms-pressure</Value>
+            <Value Enum="rms-temp">rms-temp</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="TempStatVarStatistics" Label="TempStatVarStatistics" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="TemporalStatistics" Label="Temporal Statistics" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <Double Name="StartTime" Label="Start Time" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(statistics::starttime)</BriefDescription>
+              <DefaultValue>0</DefaultValue>
+            </Double>
+            <Double Name="EndTime" Label="End Time" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(statistics::endtime)</BriefDescription>
+              <DefaultValue>1</DefaultValue>
+            </Double>
+            <Double Name="PlotWinSize" Label="Time Window Size" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(statistics::plotwinsize)</BriefDescription>
+              <DefaultValue>0.1</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+              </RangeInfo>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="VarOutput" BaseType="" Version="0" Abstract="true" Unique="false" Associations="" />
+    <AttDef Type="ElemHistVarOutput" Label="Element Time History Output" BaseType="VarOutput" Version="0" Unique="false" Associations="">
+      <ItemDefinitions>
+        <Int Name="Id" Label="Id" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <RangeInfo>
+            <Min Inclusive="true">0</Min>
+          </RangeInfo>
+        </Int>
+        <String Name="varname" Label="Variable Name" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DiscreteInfo>
+            <Value Enum="density">density</Value>
+            <Value Enum="div">div</Value>
+            <Value Enum="enstrophy">enstrophy</Value>
+            <Value Enum="enthalpy">enthalpy</Value>
+            <Value Enum="helicity">helicity</Value>
+            <Value Enum="pressure">pressure</Value>
+            <Value Enum="temp">temp</Value>
+            <Value Enum="trubeps">trubeps</Value>
+            <Value Enum="turbke">turbke</Value>
+            <Value Enum="turbnu">turbnu</Value>
+            <Value Enum="vel">vel</Value>
+            <Value Enum="vorticity">vorticity</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="SideSetHistVarOutput" Label="Sideset Time History Output" BaseType="VarOutput" Version="0" Unique="false" Associations="f">
+      <ItemDefinitions>
+        <String Name="varname" Label="Variable Name" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DiscreteInfo>
+            <Value Enum="avgpress">avgpress</Value>
+            <Value Enum="avgtemp">avgtemp</Value>
+            <Value Enum="avgvel">avgvel</Value>
+            <Value Enum="force">force</Value>
+            <Value Enum="fvol">fvol</Value>
+            <Value Enum="heatflow">heatflow</Value>
+            <Value Enum="massflow">massflow</Value>
+            <Value Enum="pressforce">pressforce</Value>
+            <Value Enum="surfarea">surfarea</Value>
+            <Value Enum="viscforce">viscforce</Value>
+            <Value Enum="volumeflow">volumeflow</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="NodePlotVarOutput" Label="Node Variable Output" BaseType="VarOutput" Version="0" Unique="false" Associations="">
+      <ItemDefinitions>
+        <String Name="varname" Label="Variable Name" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DiscreteInfo>
+            <Value Enum="density">density</Value>
+            <Value Enum="dist">dist</Value>
+            <Value Enum="enthalpy">enthalpy</Value>
+            <Value Enum="enstrophy">enstrophy</Value>
+            <Value Enum="helicity">helicity</Value>
+            <Value Enum="pressure">pressure</Value>
+            <Value Enum="procid">procid</Value>
+            <Value Enum="temp">temp</Value>
+            <Value Enum="turbeps">turbeps</Value>
+            <Value Enum="turbke">turbke</Value>
+            <Value Enum="turbnu">turbnu</Value>
+            <Value Enum="u">u</Value>
+            <Value Enum="vel">vel</Value>
+            <Value Enum="vginv2">vginv2</Value>
+            <Value Enum="vorticity">vorticity</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="ElemPlotVarOutput" Label="Element Variable Output" BaseType="VarOutput" Version="0" Unique="false" Associations="">
+      <ItemDefinitions>
+        <String Name="varname" Label="Variable Name" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DiscreteInfo>
+            <Value Enum="cfl">cfl</Value>
+            <Value Enum="density">density</Value>
+            <Value Enum="dist">dist</Value>
+            <Value Enum="div">div</Value>
+            <Value Enum="enthalpy">enthalpy</Value>
+            <Value Enum="enstrophy">enstrophy</Value>
+            <Value Enum="helicity">helicity</Value>
+            <Value Enum="pressure">pressure</Value>
+            <Value Enum="procid">procid</Value>
+            <Value Enum="temp">temp</Value>
+            <Value Enum="turbeps">turbeps</Value>
+            <Value Enum="turbke">turbke</Value>
+            <Value Enum="turbnu">turbnu</Value>
+            <Value Enum="vel">vel</Value>
+            <Value Enum="vginv2">vginv2</Value>
+            <Value Enum="vorticity">vorticity</Value>
+            <Value Enum="ystar">ystar</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="SideSetPlotVarOutput" Label="Sideset Variable Output" BaseType="VarOutput" Version="0" Unique="false" Associations="f">
+      <ItemDefinitions>
+        <String Name="varname" Label="Variable Name" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <DiscreteInfo>
+            <Value Enum="traction">traction</Value>
+            <Value Enum="straction">straction</Value>
+            <Value Enum="ntraction">ntraction</Value>
+            <Value Enum="wallshear">wallshear</Value>
+            <Value Enum="yplus">yplus</Value>
+            <Value Enum="ystar">ystar</Value>
+            <Value Enum="varyplus">varyplus</Value>
+            <Value Enum="heatflux">heatflux</Value>
+            <Value Enum="nheatflux">nheatflux</Value>
+            <Value Enum="surfarea">surfarea</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="energy" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <String Name="energy" Label="Energy Equation Formulation" Version="0" Optional="true" IsEnabledByDefault="false" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>Energy Equation</Cat>
+          </Categories>
+          <BriefDescription>(energy)</BriefDescription>
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="Isothermal">isothermal</Value>
+            <Value Enum="Temperature">temperature</Value>
+            <Value Enum="Enthalpy">enthalpy</Value>
+            <Value Enum="Internal Energy">int_energy</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="hydrostat" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="Hydrostat" Label="Hydrostatic pressure" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <Double Name="Value" Label="Load Curve" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(hydrostat::nodeset [amplitude])</BriefDescription>
+              <DetailedDescription>Prescribe the hydrostatic pressure. This may be used in conjunction with prescribed pressure
+              boundary conditions, or by itself. When used by itself, the hstat keyword plays two roles. It makes
+              the pressure-Poisson equation non-singular and it permits the pressure for the system to be uniquely
+              determined. When the hstat keyword is used with prescribed pressure boundary conditions, then
+              it only specifies the unique hydrostatic pressure level for the system. In either case, the pressure
+              time-history and field output is adjusted to reflect the specified hydrostatic pressure level.</DetailedDescription>
+              <ExpressionType>PolyLinearFunction</ExpressionType>
+            </Double>
+            <Double Name="Scale" Label="Scale" Version="0" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(hydrostat::nodeset [loadCurveId])</BriefDescription>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="momentumsolver" Label="Momentum Solver" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="MomentumSolver" Label="Momentum Solver" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <String Name="type" Label="Type" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(momentumsolver::type)</BriefDescription>
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="Flexible GMRES">FGMRES</Value>
+                <Value Enum="ILU-Preconditioned FGMRES">ILUFGMRES</Value>
+                <Value Enum="GMRES">GMRES</Value>
+                <Value Enum="ILU-Preconditioned GMRES">ILUGMRES</Value>
+              </DiscreteInfo>
+            </String>
+            <Int Name="restart" Label="Number of restart vectors" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(momentumsolver::restart)</BriefDescription>
+              <DefaultValue>30</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">100</Max>
+              </RangeInfo>
+            </Int>
+            <Int Name="itmax" Label="Maximum number of iterations" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>The maximum number of iterations (momentumsolver::itmax).</BriefDescription>
+              <DefaultValue>500</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">500</Max>
+              </RangeInfo>
+            </Int>
+            <Int Name="itchk" Label="Convergence criteria checking frequency" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>The number of iterations to take before checking convergence criteria (momentumsolver::itchk)</BriefDescription>
+              <DefaultValue>2</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">25</Max>
+              </RangeInfo>
+            </Int>
+            <Void Name="diagnostics" Label="Diagnostics" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable the diagnostic information from the solver (momentumsolver::diagnostics)</BriefDescription>
+            </Void>
+            <Void Name="convergence" Label="Convergence metrics" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable the convergence metrics or the solver (momentumsolver::convergence)</BriefDescription>
+            </Void>
+            <Double Name="eps" Label="Convergence criteria" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(momentumsolver::eps)</BriefDescription>
+              <DefaultValue>1e-05</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="ppesolver" Label="ppesolver" BaseType="" Version="0" Unique="false" Associations="">
+      <ItemDefinitions>
+        <Group Name="PressurePoissonSolver" Label="Pressure Poisson Solver" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <String Name="ppetype" Label="Type" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(ppesolver::type)</BriefDescription>
+              <ChildrenDefinitions>
+                <String Name="preconditioner" Label="Preconditioner" Version="0" Optional="true" IsEnabledByDefault="false" NumberOfRequiredValues="1">
+                  <Categories>
+                    <Cat>General</Cat>
+                  </Categories>
+                  <BriefDescription>(ppesolver::amgpc)</BriefDescription>
+                  <ChildrenDefinitions>
+                    <Int Name="agg_num_levels" Label="Number of Levels of Aggressive Coarsening" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::agg_num_levels)</BriefDescription>
+                      <DefaultValue>0</DefaultValue>
+                    </Int>
+                    <Int Name="agg_num_paths" Label="Number of Paths of Aggressive Coarsening" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::agg_num_paths)</BriefDescription>
+                      <DefaultValue>1</DefaultValue>
+                    </Int>
+                    <String Name="cycle" Label="AMG Cycle" Version="0" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::cycle)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="0">
+                        <Value Enum="V">V</Value>
+                        <Value Enum="W">W</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <String Name="hypre_coarsen_type" Label="Coarsening Algorithm" Version="0" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::hypre_coarsen_type)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="3">
+                        <Value Enum="Cleary-Luby-Jones-Plassman">CLJP</Value>
+                        <Value Enum="classical Ruge-Steuben on each processor, no boundary treatment">RUGE STEUBEN</Value>
+                        <Value Enum="classical Ruge-Steuben on each processor, followed by a third pass">MODIFIED RUGE STEUBEN</Value>
+                        <Value Enum="Falgout coarsening">FALGOUT</Value>
+                        <Value Enum="PMIS-coarsening">PMIS</Value>
+                        <Value Enum="HMIS-coarsening">HMIS</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <Void Name="hypre_nodal" Label="Enable Nodal Systems Coarsening" Version="0" AdvanceLevel="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppseolver::hypre_nodal)</BriefDescription>
+                    </Void>
+                    <String Name="hypre_smoother" Label="Smoother" Version="0" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::hypre_smoother)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="4">
+                        <Value Enum="Jacobi">JACOBI</Value>
+                        <Value Enum="Gauss-Seidel, Sequential">SEQ_SGS</Value>
+                        <Value Enum="Hybrid Gauss-Seidel or SOR, Forward Solve">HYB_GS</Value>
+                        <Value Enum="Hybrid Gauss-Seidel or SOR, Backward Solve">BACK_HYB_GS</Value>
+                        <Value Enum="Hybrid Symmetric Gauss-Seidel or SSOR">HYB_SGS</Value>
+                        <Value Enum="Gaussian elimination">GE</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <String Name="hypre_smoother_co" Label="Smoother Coarsest" Version="0" Optional="true" IsEnabledByDefault="false" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::hypre_smoother_co)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="5">
+                        <Value Enum="Jacobi">JACOBI</Value>
+                        <Value Enum="Gauss-Seidel, Sequential">SEQ_SGS</Value>
+                        <Value Enum="Hybrid Gauss-Seidel or SOR, Forward Solve">HYB_GS</Value>
+                        <Value Enum="Hybrid Gauss-Seidel or SOR, Backward Solve">BACK_HYB_GS</Value>
+                        <Value Enum="Hybrid Symmetric Gauss-Seidel or SSOR">HYB_SGS</Value>
+                        <Value Enum="Gaussian Elimination">GE</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <String Name="hypre_smoother_dn" Label="Smoother Down" Version="0" Optional="true" IsEnabledByDefault="false" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::hypre_smoother_dn)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="4">
+                        <Value Enum="Jacobi">JACOBI</Value>
+                        <Value Enum="Gauss-Seidel, Sequential">SEQ_SGS</Value>
+                        <Value Enum="Hybrid Gauss-Seidel or SOR, Forward Solve">HYB_GS</Value>
+                        <Value Enum="Hybrid Gauss-Seidel or SOR, Backward Solve">BACK_HYB_GS</Value>
+                        <Value Enum="Hybrid Symmetric Gauss-Seidel or SSOR">HYB_SGS</Value>
+                        <Value Enum="Gaussian elimination">GE</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <String Name="hypre_smoother_up" Label="Smoother Up" Version="0" Optional="true" IsEnabledByDefault="false" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::hypre_smoother_up)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="4">
+                        <Value Enum="Jacobi">JACOBI</Value>
+                        <Value Enum="Gauss-Seidel, Sequential">SEQ_SGS</Value>
+                        <Value Enum="Hybrid Gauss-Seidel or SOR, Forward Solve">HYB_GS</Value>
+                        <Value Enum="Hybrid Gauss-Seidel or SOR, Backward Solve">BACK_HYB_GS</Value>
+                        <Value Enum="Hybrid Symmetric Gauss-Seidel or SSOR">HYB_SGS</Value>
+                        <Value Enum="Gaussian Elimination">GE</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <String Name="interp_type" Label="Parallel Interpolation Operator" Version="0" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::interp_type)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="0">
+                        <Value Enum="Classical">CLASSICAL</Value>
+                        <Value Enum="Direct">DIRECT</Value>
+                        <Value Enum="Multipass">MULTIPASS</Value>
+                        <Value Enum="Multipass with Separation of Weights">MULTIPASS WTS</Value>
+                        <Value Enum="Extended+i">EXT+I</Value>
+                        <Value Enum="Extended+i (if no Common C Neighbor)">EXT+I-CC</Value>
+                        <Value Enum="Standard">STANDARD</Value>
+                        <Value Enum="Standard with Separation of Weights">STANDARD WTS</Value>
+                        <Value Enum="FF">FF</Value>
+                        <Value Enum="FF1">FF1</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <Int Name="levels" Label="Maximum Number of AMG Levels" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::levels)</BriefDescription>
+                      <DefaultValue>20</DefaultValue>
+                    </Int>
+                    <Double Name="max_rowsum" Label="Parameter to Modify the Definition of Strength for Diagonally Dominant Portions of the Matrix" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::max_rowsum)</BriefDescription>
+                      <DefaultValue>0.9</DefaultValue>
+                    </Double>
+                    <Int Name="pmax_elements" Label="Maximum Element/Row for the Interpolation" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::pmax_elements)</BriefDescription>
+                      <DefaultValue>0</DefaultValue>
+                    </Int>
+                    <Int Name="pre_smooth" Label="Number of Presmoothing Sweeps" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::pre_smooth)</BriefDescription>
+                      <DefaultValue>1</DefaultValue>
+                    </Int>
+                    <String Name="smoother" Label="Smoother" Version="0" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::smoother)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="0">
+                        <Value Enum="Incomplete Cholesky">ICC</Value>
+                        <Value Enum="Incomplete LU">ILU</Value>
+                        <Value Enum="Successive Over-Relaxation">SSOR</Value>
+                        <Value Enum="Chebychev Polynomial">CHEBYCHEV</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <String Name="solver" Label="AMG Krylov Solver" Version="0" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::solver)</BriefDescription>
+                      <DiscreteInfo DefaultIndex="0">
+                        <Value Enum="Conjugate Gradient">CG</Value>
+                        <Value Enum="Stabilized Bi-Conjugate Gradient Squared">BCGS</Value>
+                        <Value Enum="Flexible Generalized Minimum Residual">FGMRES</Value>
+                      </DiscreteInfo>
+                    </String>
+                    <Double Name="strong_threshold" Label="Strength Threshold" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::strong_threshold)</BriefDescription>
+                      <DefaultValue>0.85</DefaultValue>
+                    </Double>
+                    <Double Name="trunc_factor" Label="Interpolation Truncation Factor" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+                      <Categories>
+                        <Cat>General</Cat>
+                      </Categories>
+                      <BriefDescription>(ppesolver::trunc_factor)</BriefDescription>
+                      <DefaultValue>0</DefaultValue>
+                    </Double>
+                  </ChildrenDefinitions>
+                  <DiscreteInfo DefaultIndex="0">
+                    <Structure>
+                      <Value Enum="Multilevel Preconditioner">ml</Value>
+                      <Items>
+                        <Item>smoother</Item>
+                        <Item>cycle</Item>
+                        <Item>solver</Item>
+                        <Item>pre_smooth</Item>
+                        <Item>levels</Item>
+                      </Items>
+                    </Structure>
+                    <Structure>
+                      <Value Enum="Hypre">hypre</Value>
+                      <Items>
+                        <Item>hypre_coarsen_type</Item>
+                        <Item>hypre_smoother</Item>
+                        <Item>hypre_smoother_dn</Item>
+                        <Item>hypre_smoother_up</Item>
+                        <Item>hypre_smoother_co</Item>
+                        <Item>interp_type</Item>
+                        <Item>hypre_nodal</Item>
+                        <Item>trunc_factor</Item>
+                        <Item>pmax_elements</Item>
+                        <Item>agg_num_levels</Item>
+                        <Item>agg_num_paths</Item>
+                        <Item>strong_threshold</Item>
+                        <Item>max_rowsum</Item>
+                        <Item>cycle</Item>
+                        <Item>solver</Item>
+                        <Item>pre_smooth</Item>
+                        <Item>levels</Item>
+                      </Items>
+                    </Structure>
+                  </DiscreteInfo>
+                </String>
+              </ChildrenDefinitions>
+              <DiscreteInfo DefaultIndex="0">
+                <Structure>
+                  <Value Enum="AMG">AMG</Value>
+                  <Items>
+                    <Item>preconditioner</Item>
+                  </Items>
+                </Structure>
+                <Value Enum="SSORCG">SSORCG</Value>
+                <Value Enum="JPCG">JPCG</Value>
+              </DiscreteInfo>
+            </String>
+            <Int Name="itmax" Label="Maximum number of iterations" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>The maximum number of iterations. In the case of AMG, this is the maximum number of V or W cycles (ppesolver::itmax).</BriefDescription>
+              <DefaultValue>500</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">500</Max>
+              </RangeInfo>
+            </Int>
+            <Int Name="itchk" Label="Convergence criteria checking frequency" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>The number of iterations to take before checking convergence criteria (ppesolver::itchk).</BriefDescription>
+              <DefaultValue>2</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">25</Max>
+              </RangeInfo>
+            </Int>
+            <Void Name="diagnostics" Label="Diagnostics" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable the diagnostic information from the linear solver (ppesolver::diagnostics)</BriefDescription>
+            </Void>
+            <Void Name="convergence" Label="Convergence metrics" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable the convergence metrics or the linear solver (ppesolver::convergence)</BriefDescription>
+            </Void>
+            <Double Name="eps" Label="Convergence criteria" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(ppesolver::eps)</BriefDescription>
+              <DefaultValue>1e-05</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+            <Double Name="pivot" Label="Preconditioner zero pivot value" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(ppesolver::zeropivot)</BriefDescription>
+              <DefaultValue>1e-16</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">0.1</Max>
+              </RangeInfo>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="simulationtime" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Int Name="nsteps" Label="Maximum number of time steps" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>The maximum number of time steps to be taken during a single simulation (nsteps)</BriefDescription>
+          <DefaultValue>10</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">1</Min>
+          </RangeInfo>
+        </Int>
+        <Double Name="term" Label="Simulation termination time" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>Define the simulation termination time, in units consistent with the problem definition (term)</BriefDescription>
+          <DefaultValue>1</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="false">0</Min>
+          </RangeInfo>
+        </Double>
+        <Double Name="deltat" Label="Time step size" Version="0" NumberOfRequiredValues="1">
+          <Categories>
+            <Cat>General</Cat>
+          </Categories>
+          <BriefDescription>Define the time step size to be used. This value may be over-ridden by physics specific constraints on the time step (deltat)</BriefDescription>
+          <DefaultValue>0.01</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="false">0</Min>
+          </RangeInfo>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="solution_method" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="SolutionMethod" Label="Solution Method" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <String Name="strategy" Label="Strategy" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>solution_method::strategy</BriefDescription>
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="Projection">projection</Value>
+                <Value Enum="Picard">picard</Value>
+              </DiscreteInfo>
+            </String>
+            <String Name="pressure_update" Label="Pressure Update" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>solution_method::pressure_update</BriefDescription>
+              <DiscreteInfo DefaultIndex="1">
+                <Value Enum="Chorin">chorin</Value>
+                <Value Enum="Gradient">gradient</Value>
+                <Value Enum="Curvature">curvature</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="curlfree_fix" Label="Curl Free Fix (Picard only)" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable the diagnostic information from the solver (solution_method::curlfree_fix)</BriefDescription>
+            </Void>
+            <Int Name="itmax" Label="Maximum number of iterations" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>The maximum number of non-linear iterations to be taken during each time step (solution_method::itmax)</BriefDescription>
+              <DefaultValue>5</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+              </RangeInfo>
+            </Int>
+            <Double Name="eps" Label="Convergence criteria" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(solution_method::eps)</BriefDescription>
+              <DefaultValue>0.0001</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+            <Double Name="eps_dist" Label="Convergence criteria for normal-distance function" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(solution_method::eps_dist)</BriefDescription>
+              <DefaultValue>1e-05</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+            <Double Name="eps_p0" Label="Convergence criteria for initial div-free projection and initial pressure computation" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(solution_method::eps_p0)</BriefDescription>
+              <DefaultValue>1e-05</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+            <Void Name="convergence" Label="Convergence" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable writing information about the non-linear convergence history to the conv file when using the Picard solution method (solution_method::convergence)</BriefDescription>
+            </Void>
+            <Void Name="diagnostics" Label="Diagnostics" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable printing diagnostic information to the screen about the non-linear convergence history to the conv file when using the Picard solution method (solution_method::diagnostics)</BriefDescription>
+            </Void>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="time_integration" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="TimeIntegration" Label="Time Integration" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <String Name="type" Label="Method" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(time_integration::type)</BriefDescription>
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="Fixed CFL">fixed_cfl</Value>
+                <Value Enum="Fixed time step">fixed_dt</Value>
+              </DiscreteInfo>
+            </String>
+            <Double Name="CFLinit" Label="Initial CFL number to use at startup" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(time_integration::CFLinit)</BriefDescription>
+              <DefaultValue>1</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">100</Max>
+              </RangeInfo>
+            </Double>
+            <Double Name="CFLmax" Label="Maximum CFL number to use at startup" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(time_integration::CFLmax)</BriefDescription>
+              <DefaultValue>2</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+              </RangeInfo>
+            </Double>
+            <Double Name="dtmax" Label="Maximum time step" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(time_integration::dtmax)</BriefDescription>
+              <DefaultValue>1</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+              </RangeInfo>
+            </Double>
+            <Double Name="dtscale" Label="Factor used to increase the time step" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(time_integration::dtscale)</BriefDescription>
+              <DefaultValue>1.025</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+              </RangeInfo>
+            </Double>
+            <Double Name="thetaa" Label="Time weight for advective terms" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Value of 0 indicates explicit advection and value of 1 indicates implicit (time_integration::thetaa)</BriefDescription>
+              <DefaultValue>0.5</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+            <Double Name="thetaK" Label="Time weight for advective terms" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Value of 0 indicates explicit advection and value of 1 indicates implicit (time_integration::thetak)</BriefDescription>
+              <DefaultValue>0.5</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+            <Double Name="thetaf" Label="Time weight for source terms" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Value of 0 indicates explicit treatment and value of 1 indicates implicit (time_integration::thetaf)</BriefDescription>
+              <DefaultValue>0.5</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+            <Void Name="trimlast" Label="Use exact termination time" Version="0" Optional="true" IsEnabledByDefault="false">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(time_integration::trimlast)</BriefDescription>
+            </Void>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="transportsolver" Label="Transport Solver" BaseType="" Version="0" Unique="true" Associations="">
+      <ItemDefinitions>
+        <Group Name="TransportSolver" Label="Transport Solver" Version="0" NumberOfRequiredGroups="1">
+          <ItemDefinitions>
+            <String Name="type" Label="Type" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(transportsolver::type)</BriefDescription>
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="Flexible GMRES">FGMRES</Value>
+                <Value Enum="ILU-Preconditioned FGMRES">ILUFGMRES</Value>
+                <Value Enum="GMRES">GMRES</Value>
+                <Value Enum="ILU-Preconditioned GMRES">ILUGMRES</Value>
+              </DiscreteInfo>
+            </String>
+            <Int Name="restart" Label="Number of restart vectors" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(transportsolver::restart)</BriefDescription>
+              <DefaultValue>30</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">100</Max>
+              </RangeInfo>
+            </Int>
+            <Int Name="itmax" Label="Maximum number of iterations" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>The maximum number of iterations (transportsolver::itmax)</BriefDescription>
+              <DefaultValue>500</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">500</Max>
+              </RangeInfo>
+            </Int>
+            <Int Name="itchk" Label="Convergence criteria checking frequency" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>The number of iterations to take before checking convergence criteria (transportsolver::itchk)</BriefDescription>
+              <DefaultValue>2</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">25</Max>
+              </RangeInfo>
+            </Int>
+            <Void Name="diagnostics" Label="Diagnostics" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable the diagnostic information from the solver (transportsolver::diagnostics)</BriefDescription>
+            </Void>
+            <Void Name="convergence" Label="Convergence metrics" Version="0" Optional="true" IsEnabledByDefault="false" AdvanceLevel="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>Enable/disable the convergence metrics or the solver (transportsolver::convergence)</BriefDescription>
+            </Void>
+            <Double Name="eps" Label="Convergence criteria" Version="0" AdvanceLevel="1" NumberOfRequiredValues="1">
+              <Categories>
+                <Cat>General</Cat>
+              </Categories>
+              <BriefDescription>(transportsolver::eps)</BriefDescription>
+              <DefaultValue>1e-05</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="false">0</Min>
+                <Max Inclusive="true">1</Max>
+              </RangeInfo>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+  </Definitions>
+  <!--**********  Attribute Instances ***********-->
+  <Attributes>
+    <Att Name="Turbulence Model" Type="BasicTurbulenceModel" ID="7">
+      <Items>
+        <String Name="Method" Enabled="false" Discrete="true">
+          <ChildrenItems>
+            <Double Name="c_s">0.18</Double>
+            <Double Name="c_w">0.18</Double>
+            <Double Name="prandtl">0.889</Double>
+            <Double Name="schmidt">1</Double>
+            <Void Name="timescale_limiter" Enabled="false" />
+          </ChildrenItems>
+          0
+        </String>
+      </Items>
+    </Att>
+    <Att Name="Pressure-0" Type="Pressure" ID="16">
+      <Items>
+        <Double Name="LoadCurve" Enabled="false" />
+        <Double Name="Scale">3.14159</Double>
+      </Items>
+    </Att>
+    <Att Name="TurbulentViscosity-0" Type="TurbulentViscosity" ID="17">
+      <Items>
+        <Double Name="LoadCurve" Enabled="false" />
+        <Double Name="Scale">0.987</Double>
+      </Items>
+    </Att>
+    <Att Name="VelXBoundaryCondition-0" Type="VelXBoundaryCondition" ID="23">
+      <Items>
+        <Double Name="LoadCurve" Enabled="false" />
+        <Double Name="Scale">2.71828</Double>
+      </Items>
+    </Att>
+    <Att Name="VelZBoundaryCondition-0" Type="VelZBoundaryCondition" ID="24">
+      <Items>
+        <Double Name="LoadCurve" Enabled="false" />
+        <Double Name="Scale">42.42</Double>
+      </Items>
+    </Att>
+    <Att Name="Execution Control" Type="ExecutionControl" ID="1">
+      <Items>
+        <Int Name="ExecutionControl">0</Int>
+      </Items>
+    </Att>
+    <Att Name="Initial Conditions" Type="InitialConditions" ID="10">
+      <Items>
+        <Group Name="InitialConditions">
+          <Double Name="Velocity">
+            <Values>
+              <Val Ith="0">10</Val>
+              <Val Ith="1">0</Val>
+              <Val Ith="2">0</Val>
+            </Values>
+          </Double>
+          <Double Name="tke">0</Double>
+          <Double Name="itdr">0</Double>
+          <Double Name="idts">0</Double>
+          <Double Name="tv">0.0005</Double>
+          <Double Name="temperature">0</Double>
+          <Double Name="internalenergy">0</Double>
+          <Double Name="enthalpy">0</Double>
+        </Group>
+      </Items>
+    </Att>
+    <Att Name="Load Balancer" Type="LoadBalancer" ID="0">
+      <Items>
+        <String Name="Method" Discrete="true">4</String>
+        <Void Name="Load Balance Diagnostics" Enabled="false" />
+      </Items>
+    </Att>
+    <Att Name="Material-0" Type="Material" ID="15">
+      <Items>
+        <Double Name="Density">1</Double>
+        <String Name="specificheattype" Discrete="true">0</String>
+        <Double Name="specificheatvalue" />
+        <Double Name="k">
+          <Values>
+            <UnsetVal Ith="0" />
+            <UnsetVal Ith="1" />
+            <UnsetVal Ith="2" />
+            <UnsetVal Ith="3" />
+            <UnsetVal Ith="4" />
+            <UnsetVal Ith="5" />
+          </Values>
+        </Double>
+        <Double Name="mu">0.001</Double>
+        <Double Name="beta">0</Double>
+        <Double Name="Tref">0</Double>
+        <Void Name="rigid" Enabled="false" />
+        <Double Name="velxyz">
+          <Values>
+            <Val Ith="0">0</Val>
+            <Val Ith="1">1</Val>
+            <Val Ith="2">2</Val>
+          </Values>
+        </Double>
+      </Items>
+    </Att>
+    <Att Name="Output" Type="Output" ID="2">
+      <Items>
+        <Group Name="RestartOutput">
+          <Int Name="frequency">0</Int>
+          <String Name="type" Discrete="true">0</String>
+        </Group>
+        <Group Name="FieldOutput">
+          <Int Name="frequency">500</Int>
+          <String Name="type" Discrete="true">1</String>
+        </Group>
+      </Items>
+    </Att>
+    <Att Name="Status Information" Type="StatusInformation" ID="3">
+      <Items>
+        <Int Name="minmaxfrequency">10</Int>
+        <Int Name="tifrequency">1</Int>
+        <String Name="PrintLevel" Discrete="true">
+          <ChildrenItems>
+            <Int Name="hcfrequency">0</Int>
+          </ChildrenItems>
+          2
+        </String>
+      </Items>
+    </Att>
+    <Att Name="Parameters" Type="TempStatVarStatistics" ID="14">
+      <Items>
+        <Group Name="TemporalStatistics">
+          <Double Name="StartTime">0</Double>
+          <Double Name="EndTime">1</Double>
+          <Double Name="PlotWinSize">0.1</Double>
+        </Group>
+      </Items>
+    </Att>
+    <Att Name="NodePlotVarOutput-4" Type="NodePlotVarOutput" ID="22">
+      <Items>
+        <String Name="varname" Discrete="true">10</String>
+      </Items>
+    </Att>
+    <Att Name="NodePlotVarOutput-1" Type="NodePlotVarOutput" ID="19">
+      <Items>
+        <String Name="varname" Discrete="true">0</String>
+      </Items>
+    </Att>
+    <Att Name="NodePlotVarOutput-3" Type="NodePlotVarOutput" ID="21">
+      <Items>
+        <String Name="varname" Discrete="true">12</String>
+      </Items>
+    </Att>
+    <Att Name="ElemPlotVarOutput-2" Type="ElemPlotVarOutput" ID="20">
+      <Items>
+        <String Name="varname" Discrete="true">7</String>
+      </Items>
+    </Att>
+    <Att Name="ElemPlotVarOutput-0" Type="ElemPlotVarOutput" ID="18">
+      <Items>
+        <String Name="varname" Discrete="true">13</String>
+      </Items>
+    </Att>
+    <Att Name="energy" Type="energy" ID="8">
+      <Items>
+        <String Name="energy" Enabled="false" Discrete="true">0</String>
+      </Items>
+    </Att>
+    <Att Name="Hydrostatic Pressure" Type="hydrostat" ID="9">
+      <Items>
+        <Group Name="Hydrostat">
+          <Double Name="Value" Enabled="false" />
+          <Double Name="Scale" />
+        </Group>
+      </Items>
+    </Att>
+    <Att Name="Momentum Solver" Type="momentumsolver" ID="12">
+      <Items>
+        <Group Name="MomentumSolver">
+          <String Name="type" Discrete="true">1</String>
+          <Int Name="restart">15</Int>
+          <Int Name="itmax">50</Int>
+          <Int Name="itchk">2</Int>
+          <Void Name="diagnostics" Enabled="false" />
+          <Void Name="convergence" Enabled="true" />
+          <Double Name="eps">1e-05</Double>
+        </Group>
+      </Items>
+    </Att>
+    <Att Name="Pressure Poisson Solver" Type="ppesolver" ID="11">
+      <Items>
+        <Group Name="PressurePoissonSolver">
+          <String Name="ppetype" Discrete="true">
+            <ChildrenItems>
+              <String Name="preconditioner" Enabled="false" Discrete="true">
+                <ChildrenItems>
+                  <Int Name="agg_num_levels">0</Int>
+                  <Int Name="agg_num_paths">1</Int>
+                  <String Name="cycle" Discrete="true">0</String>
+                  <String Name="hypre_coarsen_type" Discrete="true">3</String>
+                  <Void Name="hypre_nodal" />
+                  <String Name="hypre_smoother" Discrete="true">4</String>
+                  <String Name="hypre_smoother_co" Enabled="false" Discrete="true">5</String>
+                  <String Name="hypre_smoother_dn" Enabled="false" Discrete="true">4</String>
+                  <String Name="hypre_smoother_up" Enabled="false" Discrete="true">4</String>
+                  <String Name="interp_type" Discrete="true">0</String>
+                  <Int Name="levels">20</Int>
+                  <Double Name="max_rowsum">0.9</Double>
+                  <Int Name="pmax_elements">0</Int>
+                  <Int Name="pre_smooth">1</Int>
+                  <String Name="smoother" Discrete="true">0</String>
+                  <String Name="solver" Discrete="true">0</String>
+                  <Double Name="strong_threshold">0.85</Double>
+                  <Double Name="trunc_factor">0</Double>
+                </ChildrenItems>
+                0
+              </String>
+            </ChildrenItems>
+            0
+          </String>
+          <Int Name="itmax">400</Int>
+          <Int Name="itchk">1</Int>
+          <Void Name="diagnostics" Enabled="true" />
+          <Void Name="convergence" Enabled="false" />
+          <Double Name="eps">1e-05</Double>
+          <Double Name="pivot">1e-16</Double>
+        </Group>
+      </Items>
+    </Att>
+    <Att Name="Simulation Time" Type="simulationtime" ID="4">
+      <Items>
+        <Int Name="nsteps">10</Int>
+        <Double Name="term">4</Double>
+        <Double Name="deltat">0.0001</Double>
+      </Items>
+    </Att>
+    <Att Name="Solution Method" Type="solution_method" ID="5">
+      <Items>
+        <Group Name="SolutionMethod">
+          <String Name="strategy" Discrete="true">0</String>
+          <String Name="pressure_update" Discrete="true">1</String>
+          <Void Name="curlfree_fix" Enabled="false" />
+          <Int Name="itmax">5</Int>
+          <Double Name="eps">0.0001</Double>
+          <Double Name="eps_dist">1e-05</Double>
+          <Double Name="eps_p0">1e-05</Double>
+          <Void Name="convergence" Enabled="false" />
+          <Void Name="diagnostics" Enabled="false" />
+        </Group>
+      </Items>
+    </Att>
+    <Att Name="Time Integration" Type="time_integration" ID="6">
+      <Items>
+        <Group Name="TimeIntegration">
+          <String Name="type" Discrete="true">0</String>
+          <Double Name="CFLinit">1</Double>
+          <Double Name="CFLmax">2</Double>
+          <Double Name="dtmax">1</Double>
+          <Double Name="dtscale">1.025</Double>
+          <Double Name="thetaa">1</Double>
+          <Double Name="thetaK">1</Double>
+          <Double Name="thetaf">0.5</Double>
+          <Void Name="trimlast" Enabled="false" />
+        </Group>
+      </Items>
+    </Att>
+    <Att Name="Transport Solver" Type="transportsolver" ID="13">
+      <Items>
+        <Group Name="TransportSolver">
+          <String Name="type" Discrete="true">1</String>
+          <Int Name="restart">15</Int>
+          <Int Name="itmax">50</Int>
+          <Int Name="itchk">2</Int>
+          <Void Name="diagnostics" Enabled="false" />
+          <Void Name="convergence" Enabled="false" />
+          <Double Name="eps">1e-05</Double>
+        </Group>
+      </Items>
+    </Att>
+  </Attributes>
+  <!--********** Workflow Views ***********-->
+  <RootView Title="SimBuilder">
+    <DefaultColor>1.15421e-316, 1.97626e-322, 1.15604e-316, 1.15384e-316</DefaultColor>
+    <InvalidColor>1.15421e-316, 1.97626e-322, 1.15604e-316, 1.15384e-316</InvalidColor>
+    <AdvancedFontEffects>Bold="1" Italic="0"</AdvancedFontEffects>
+    <MaxValueLabelLength>200</MaxValueLabelLength>
+    <MinValueLabelLength>50</MinValueLabelLength>
+    <AttributeView Title="Materials" ModelEntityFilter="r">
+      <AttributeTypes>
+        <Type>Material</Type>
+      </AttributeTypes>
+    </AttributeView>
+    <AttributeView Title="Source Terms" ModelEntityFilter="r">
+      <AttributeTypes>
+        <Type>BodyForce</Type>
+      </AttributeTypes>
+    </AttributeView>
+    <InstancedView Title="Execution">
+      <InstancedAttributes>
+        <Att Type="LoadBalancer">Load Balancer</Att>
+        <Att Type="ExecutionControl">Execution Control</Att>
+        <Att Type="Output">Output</Att>
+        <Att Type="StatusInformation">Status Information</Att>
+      </InstancedAttributes>
+    </InstancedView>
+    <InstancedView Title="Problem Definition">
+      <InstancedAttributes>
+        <Att Type="simulationtime">Simulation Time</Att>
+        <Att Type="solution_method">Solution Method</Att>
+        <Att Type="time_integration">Time Integration</Att>
+        <Att Type="BasicTurbulenceModel">Turbulence Model</Att>
+        <Att Type="energy">energy</Att>
+        <Att Type="hydrostat">Hydrostatic Pressure</Att>
+        <Att Type="InitialConditions">Initial Conditions</Att>
+      </InstancedAttributes>
+    </InstancedView>
+    <InstancedView Title="Solvers">
+      <InstancedAttributes>
+        <Att Type="ppesolver">Pressure Poisson Solver</Att>
+        <Att Type="momentumsolver">Momentum Solver</Att>
+        <Att Type="transportsolver">Transport Solver</Att>
+      </InstancedAttributes>
+    </InstancedView>
+    <AttributeView Title="Field Output">
+      <AttributeTypes>
+        <Type>VarOutput</Type>
+      </AttributeTypes>
+    </AttributeView>
+    <GroupView Title="Group Temporal Statistics" Style="Tiled">
+      <InstancedView Title="Plot Window Parameters">
+        <InstancedAttributes>
+          <Att Type="TempStatVarStatistics">Parameters</Att>
+        </InstancedAttributes>
+      </InstancedView>
+      <AttributeView Title="Variables">
+        <AttributeTypes>
+          <Type>TempStatVarOutput</Type>
+        </AttributeTypes>
+      </AttributeView>
+    </GroupView>
+    <AttributeView Title="Boundary Conditions" ModelEntityFilter="f">
+      <AttributeTypes>
+        <Type>BoundaryCondition</Type>
+      </AttributeTypes>
+    </AttributeView>
+    <SimpleExpressionView Title="Functions">
+      <Definition>PolyLinearFunction</Definition>
+    </SimpleExpressionView>
+  </RootView>
+  <ModelInfo />
+</SMTK_AttributeManager>
+  </attribute>
+
+</cmb-resources>
