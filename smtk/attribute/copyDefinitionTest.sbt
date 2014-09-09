@@ -74,6 +74,31 @@ STILL MISSING/TODO:
           <!-- Model face is 0x104 == 404 decimal-->
           <MembershipMask>404</MembershipMask>
         </ModelEntity>
+        <String Name="ConditionalSelectionList">
+          <ChildrenDefinitions>
+            <Double Name="FirstDouble" Label="First Double">
+              <DefaultValue>1.1</DefaultValue>
+            </Double>
+            <Double Name="SecondDouble" Label="Second Double">
+              <DefaultValue>2.2</DefaultValue>
+            </Double>
+          </ChildrenDefinitions>
+          <DiscreteInfo DefaultIndex="1">
+            <Structure>
+              <Value Enum="One">0</Value>
+              <Items>
+                <Item>FirstDouble</Item>
+              </Items>
+            </Structure>
+            <Structure>
+              <Value Enum="Two">1</Value>
+              <Items>
+                <Item>FirstDouble</Item>
+                <Item>SecondDouble</Item>
+              </Items>
+            </Structure>
+          </DiscreteInfo>
+        </String>
       </ItemDefinitions>
     </AttDef>
   </Definitions>
