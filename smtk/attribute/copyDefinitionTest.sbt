@@ -80,8 +80,11 @@ STILL MISSING/TODO:
               <DefaultValue>1.1</DefaultValue>
             </Double>
             <Double Name="SecondDouble" Label="Second Double">
-              <DefaultValue>2.2</DefaultValue>
+              <ExpressionType>PolyLinearFunction</ExpressionType>
             </Double>
+            <AttributeRef Name="Reference" Label="Ref to FirstConcrete" NumberOfRequiredValues="1">
+              <AttDef>FirstConcrete</AttDef>
+            </AttributeRef>
           </ChildrenDefinitions>
           <DiscreteInfo DefaultIndex="1">
             <Structure>
@@ -95,6 +98,7 @@ STILL MISSING/TODO:
               <Items>
                 <Item>FirstDouble</Item>
                 <Item>SecondDouble</Item>
+                <Item>Reference</Item>
               </Items>
             </Structure>
           </DiscreteInfo>
