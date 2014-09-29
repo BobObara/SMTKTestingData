@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--Created by XmlV1StringWriter-->
-<SMTK_AttributeManager Version="1">
+<SMTK_AttributeSystem Version="2">
   <!--**********  Category and Analysis Infomation ***********-->
   <Categories>
     <Cat>Constituent</Cat>
@@ -140,4 +140,4 @@ There is not much here!</DetailedDescription>
     <AdvancedFontEffects>Bold="1" Italic="0"</AdvancedFontEffects>
   </RootView>
   <ModelInfo />
-</SMTK_AttributeManager>
+</SMTK_AttributeSystem>

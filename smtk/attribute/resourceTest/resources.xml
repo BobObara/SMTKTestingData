@@ -5,7 +5,7 @@
   </attribute>
   <attribute role="template" id="att1">
 <!--Created by XmlV1StringWriter-->
-<SMTK_AttributeManager Version="1">
+<SMTK_AttributeSystem Version="2">
   <!--**********  Category and Analysis Information ***********-->
   <Categories>
     <Cat>Energy Equation</Cat>
@@ -2025,7 +2025,7 @@
     </SimpleExpressionView>
   </RootView>
   <ModelInfo />
-</SMTK_AttributeManager>
+</SMTK_AttributeSystem>
   </attribute>
 
 </cmb-resources>

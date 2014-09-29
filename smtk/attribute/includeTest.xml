@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--Created by XmlV1StringWriter-->
-<SMTK_AttributeManager Version="1">
+<SMTK_AttributeSystem Version="2">
   <Includes>
     <File>includeTest/b.xml</File>
     <File>includeTest/a.xml</File>
@@ -78,4 +78,4 @@
     <AdvancedFontEffects>Bold="1" Italic="0"</AdvancedFontEffects>
   </RootView>
   <ModelInfo />
-</SMTK_AttributeManager>
+</SMTK_AttributeSystem>

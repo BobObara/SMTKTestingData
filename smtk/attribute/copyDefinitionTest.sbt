@@ -12,7 +12,7 @@ STILL MISSING/TODO:
   Extensible group
   
 -->
-<SMTK_AttributeManager Version="1">
+<SMTK_AttributeSystem Version="2">
   <Definitions>
     <AttDef Type="CommonBase" Abstract="true" Associations="v">
       <ItemDefinitions>
@@ -106,4 +106,4 @@ STILL MISSING/TODO:
       </ItemDefinitions>
     </AttDef>
   </Definitions>
-</SMTK_AttributeManager>
+</SMTK_AttributeSystem>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--Created by XmlV1StringWriter-->
-<SMTK_AttributeManager Version="1">
+<SMTK_AttributeSystem Version="2">
   <!--**********  Category and Analysis Information ***********-->
   <!--**********  Attribute Definitions ***********-->
   <Definitions>
@@ -141,4 +141,4 @@
     </InstancedView>
   </RootView>
   <ModelInfo />
-</SMTK_AttributeManager>
+</SMTK_AttributeSystem>
